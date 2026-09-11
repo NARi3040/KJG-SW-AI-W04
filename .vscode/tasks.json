@@ -6,7 +6,9 @@
             "label": "C/C++: gcc build active file",
             "command": "/usr/bin/gcc",
             "args": [
+                "-std=gnu17",
                 "-g",
+                "-Wall",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
