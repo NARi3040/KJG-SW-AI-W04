@@ -7,3 +7,7 @@
 *.o
 *.out
 core
+
+# Claude / 테스트 스크래치
+CLAUDE.md
+test/
