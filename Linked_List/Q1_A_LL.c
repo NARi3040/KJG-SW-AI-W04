@@ -87,10 +87,34 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
+// int insertNode(LinkedList *ll, int index, int value)
+// return -1(failure), 0(success)
+
+// ListNode *findNode(LinkedList *ll, int index)
+// start head O(n)
+// failure return NULL if index exist -> return &node
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	ListNode *cur;
+	int index = 0;
+
+	if (ll == NULL)
+		return -1;
+
+	cur = ll->head;
+	while (cur != NULL && cur->item < item) {
+		cur = cur->next;
+		index++;
+	}
+
+	if (cur != NULL && cur->item == item)
+		return -1;
+
+	if (insertNode(ll, index, item) == -1)
+		return -1;
+
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
