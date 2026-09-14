@@ -100,10 +100,34 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
+// int insertNode(LinkedList *ll, int index, int value)
+// return -1(failure), 0(success)
 
+// ListNode *findNode(LinkedList *ll, int index)
+// start head O(n)
+// failure return NULL if index exist -> return &node
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+	if (ll1 == NULL || ll2 == NULL) {
+		return;
+	}
+	ListNode *ll1Node, *ll2Node, *templl1, *templl2;
+	ll1Node = ll1->head; // 1
+	ll2Node = ll2->head; // 4
+
+	while(ll1Node != NULL && ll2Node != NULL) {
+		templl1 = ll1Node->next;
+		ll1Node->next = ll2Node;
+		templl2 = ll2Node->next;
+		ll2Node->next = templl1;
+		ll1->size++;
+		ll2->size--;
+
+		ll1Node = templl1;
+		ll2Node = templl2;
+		ll2->head = templl2;
+
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
