@@ -103,6 +103,27 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	if (ll == NULL || ll->size == 0) {
+		return;
+	}
+	int nf = (ll->size + 1) / 2;
+	int nb = ll->size - nf;
+
+	resultFrontList->head = ll->head;
+	resultFrontList->size = nf;
+
+	// TODO: findNode를 두 번 호출해서 앞부분을 두 번 순회함.
+	//       front 마지막 노드(index nf - 1)를 한 번만 찾고, back head는 그 노드에서 바로 얻기.
+	//       단, 끊기(next = NULL) 전에 back head를 먼저 저장해야 함.
+	resultBackList->head = findNode(ll, nf);
+	resultBackList->size = nb;
+
+	findNode(ll, nf - 1)->next = NULL;
+	ll->head = NULL;
+	ll->size = 0;
+
+	return;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
