@@ -113,12 +113,52 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+	if(ll == NULL || s == NULL) { return; }
+
+	ListNode *del = s->ll.head;
+
+	while (del != NULL) {
+	    ListNode *next = del->next;
+		free(del);
+		del = next;
+	}
+	s->ll.head = NULL; s->ll.size = 0;
+	for (ListNode *cur = ll->head; cur != NULL; cur = cur->next) {
+		ListNode *newNode = malloc(sizeof(ListNode));
+
+		newNode->item = cur->item;
+		newNode->next = s->ll.head;
+		s->ll.head = newNode;
+		s->ll.size++;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	if (s == NULL) return;
+
+	ListNode *prev = NULL;          // cur 바로 앞 노드 (cur가 top이면 NULL)
+	ListNode *cur = s->ll.head;
+
+	while (cur != NULL) {
+		ListNode *next = cur->next; // free 전에 다음 주소 확보
+
+		if (cur->item % 2 == 0) {
+			// 짝수: 체인에서 빼고 free
+			if (prev == NULL)
+				s->ll.head = next;  // top 제거 -> head 갱신
+			else
+				prev->next = next;  // 중간/바닥 제거 -> 앞 노드가 건너뜀
+			free(cur);
+			s->ll.size--;
+		}
+		else {
+			// 홀수: 그대로 두고 prev만 전진
+			prev = cur;
+		}
+
+		cur = next;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

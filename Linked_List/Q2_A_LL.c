@@ -117,14 +117,17 @@ void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 
 	while(ll1Node != NULL && ll2Node != NULL) {
 		templl1 = ll1Node->next;
-		ll1Node->next = ll2Node;
 		templl2 = ll2Node->next;
+
+		ll1Node->next = ll2Node;
 		ll2Node->next = templl1;
+
 		ll1->size++;
 		ll2->size--;
 
 		ll1Node = templl1;
 		ll2Node = templl2;
+
 		ll2->head = templl2;
 
 	}
